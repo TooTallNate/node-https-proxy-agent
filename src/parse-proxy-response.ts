@@ -34,10 +34,12 @@ export default function parseProxyResponse(
 
 		function onclose(err?: Error) {
 			debug('onclose had error %o', err);
+			reject(err);
 		}
 
 		function onend() {
 			debug('onend');
+			reject(new Error('Socket was closed by other party!'));
 		}
 
 		function onerror(err: Error) {
